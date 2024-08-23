@@ -1,5 +1,7 @@
 # ComfyUI-Fal-API-Flux
 
+![example workflow](examples/workflow_fal_api_flux_dev_with_lora.png "Example workflow")
+
 This repository contains custom nodes for ComfyUI that integrate the fal.ai FLUX.1 [dev] with LoRA API, specifically for text-to-image generation. These nodes allow you to use the FLUX.1 model directly within your ComfyUI workflows.
 
 ## Important Notes
@@ -44,8 +46,8 @@ This repository contains custom nodes for ComfyUI that integrate the fal.ai FLUX
 
 To use these custom nodes, you need to set up your fal.ai API key:
 
-1. Create a `config.ini` file in the root directory of the `ComfyUI-Fal-API-Flux` folder.
-2. Add the following content to the `config.ini` file:
+1. `config.ini` file is seen at the root directory.
+2. The content of `config.ini` is here:
    ```ini
    [falai]
    api_key = your_api_key_here
@@ -93,6 +95,17 @@ To use a LoRA model with the FLUX.1 [dev] model:
 6. Connect the output of the "Fal API Flux" node to a "Preview Image" or "Save Image" node to see the results.
 
 Note: Although there are five LoRA input slots (lora_1 to lora_5), currently only one can be used. The additional slots are reserved for future updates when multiple LoRA support may be added.
+
+### Example Workflow
+
+An example workflow is provided in the `examples` folder of this repository. To use it:
+
+1. Locate the file `examples/workflow_fal_api_flux_dev_with_lora.png` in the repository.
+2. Open ComfyUI in your web browser.
+3. Drag and drop the `workflow_fal_api_flux_dev_with_lora.png` file directly onto the ComfyUI canvas.
+4. The example workflow will be loaded, demonstrating how to use the Fal API Flux nodes with a LoRA model.
+
+This example workflow provides a starting point for using the Fal API Flux nodes in your own projects. Feel free to modify and experiment with the parameters to suit your needs.
 
 ## Troubleshooting
 
