@@ -10,6 +10,6 @@ Repository = "https://github.com/yhayano-ponotech/ComfyUI-Fal-API-Flux"
 #  Used by Comfy Registry https://comfyregistry.org
 
 [tool.comfy]
-PublisherId = ""
+PublisherId = "yas-ponotech"
 DisplayName = "ComfyUI-Fal-API-Flux"
 Icon = ""
