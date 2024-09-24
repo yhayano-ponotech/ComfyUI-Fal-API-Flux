@@ -18,6 +18,7 @@ class BaseFalAPIFluxNode:
     def __init__(self):
         self.api_key = self.get_api_key()
         os.environ['FAL_KEY'] = self.api_key
+        self.api_endpoint = None
 
     def get_api_key(self):
         config = configparser.ConfigParser()
@@ -26,6 +27,9 @@ class BaseFalAPIFluxNode:
             config.read(config_path)
             return config.get('falai', 'api_key', fallback=None)
         return None
+    
+    def set_api_endpoint(self, endpoint):
+        self.api_endpoint = endpoint
 
     @classmethod
     def INPUT_TYPES(cls):
@@ -36,10 +40,10 @@ class BaseFalAPIFluxNode:
                 "num_inference_steps": ("INT", {"default": 28, "min": 1, "max": 100}),
                 "guidance_scale": ("FLOAT", {"default": 3.5, "min": 0.1, "max": 20.0}),
                 "num_images": ("INT", {"default": 1, "min": 1, "max": 4}),
+                "enable_safety_checker": ("BOOLEAN", {"default": True}),
             },
             "optional": {
                 "seed": ("INT", {"default": 0, "min": 0, "max": 0xffffffffffffffff}),
-                "lora": ("LORA_CONFIG",),
             }
         }
 
@@ -47,7 +51,7 @@ class BaseFalAPIFluxNode:
     FUNCTION = "generate"
     CATEGORY = "image generation"
 
-    def prepare_arguments(self, prompt, image_size, num_inference_steps, guidance_scale, num_images, seed=None, lora=None, **kwargs):
+    def prepare_arguments(self, prompt, image_size, num_inference_steps, guidance_scale, num_images, enable_safety_checker, seed=None, **kwargs):
         if not self.api_key:
             raise ValueError("API key is not set. Please check your config.ini file.")
 
@@ -57,23 +61,23 @@ class BaseFalAPIFluxNode:
             "num_inference_steps": num_inference_steps,
             "guidance_scale": guidance_scale,
             "num_images": num_images,
-            "enable_safety_checker": True
+            "enable_safety_checker": enable_safety_checker
         }
 
         if seed is not None and seed != 0:
             arguments["seed"] = seed
 
-        if lora:
-            arguments["loras"] = [lora]
-
         return arguments
 
     def call_api(self, arguments):
         logger.debug(f"Full API request payload: {json.dumps(arguments, indent=2)}")
+        
+        if not self.api_endpoint:
+            raise ValueError("API endpoint is not set. Please set it using set_api_endpoint() method.")
 
         try:
             handler = fal_client.submit(
-                "fal-ai/flux-general",
+                self.api_endpoint,
                 arguments=arguments,
             )
             result = handler.get()
@@ -164,6 +168,61 @@ class BaseFalAPIFluxNode:
 
         logger.debug(f"Returning {len(output_images)} images with shape: {output_images[0].shape}")
         return output_images
+    
+    def upload_image(self, image):
+        try:
+            # Convert PyTorch tensor to numpy array
+            if isinstance(image, torch.Tensor):
+                image = image.cpu().numpy()
+
+            # Handle different shapes of numpy arrays
+            if isinstance(image, np.ndarray):
+                if image.ndim == 4 and image.shape[0] == 1:  # (1, H, W, 3) or (1, H, W, 1)
+                    image = image.squeeze(0)
+                
+                if image.ndim == 3:
+                    if image.shape[2] == 3:  # (H, W, 3) RGB image
+                        pass
+                    elif image.shape[2] == 1:  # (H, W, 1) grayscale
+                        image = np.repeat(image, 3, axis=2)
+                    elif image.shape[0] == 3:  # (3, H, W) RGB
+                        image = np.transpose(image, (1, 2, 0))
+                    elif image.shape[0] == 1:  # (1, H, W) grayscale
+                        image = np.repeat(image.squeeze(0)[..., np.newaxis], 3, axis=2)
+                elif image.shape == (1, 1, 1536):  # Special case for (1, 1, 1536) shape
+                    image = image.reshape(32, 48)
+                    image = np.repeat(image[..., np.newaxis], 3, axis=2)
+                else:
+                    raise ValueError(f"Unsupported image shape: {image.shape}")
+
+                # Normalize to 0-255 range if not already
+                if image.dtype != np.uint8:
+                    image = (image - image.min()) / (image.max() - image.min()) * 255
+                    image = image.astype(np.uint8)
+
+                image = Image.fromarray(image)
+
+            # Ensure image is in RGB mode
+            if image.mode != 'RGB':
+                image = image.convert('RGB')
+
+            # Resize image if it's too large (optional, adjust max_size as needed)
+            max_size = 1024  # Example max size
+            if max(image.size) > max_size:
+                image.thumbnail((max_size, max_size), Image.LANCZOS)
+
+            # Convert PIL Image to bytes
+            buffered = io.BytesIO()
+            image.save(buffered, format="PNG")
+            img_byte = buffered.getvalue()
+
+            # Upload the image using fal_client
+            url = fal_client.upload(img_byte, "image/png")
+            logger.info(f"Image uploaded successfully. URL: {url}")
+            return url
+        except Exception as e:
+            logger.error(f"Failed to process or upload image: {str(e)}")
+            raise
 
     def generate(self, **kwargs):
         arguments = self.prepare_arguments(**kwargs)

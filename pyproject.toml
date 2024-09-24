@@ -1,7 +1,7 @@
 [project]
 name = "comfyui-fal-api-flux"
 description = "This repository contains custom nodes for ComfyUI that integrate the fal.ai FLUX.1 [pro] and FLUX.1 [dev] with LoRA and ControlNet API, specifically for text-to-image generation. These nodes allow you to use the FLUX.1 model directly within your ComfyUI workflows."
-version = "1.2.0"
+version = "1.3.0"
 license = {file = "LICENSE"}
 dependencies = ["requests==2.32.3", "configparser==7.1.0", "fal-client==0.4.1", "numpy==2.1.1", "torch"]
 

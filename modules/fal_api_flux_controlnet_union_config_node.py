@@ -36,7 +36,7 @@ class FalAPIFluxControlNetUnionConfigNode:
         return ({
             "path": path,
             "controls": [{
-                "control_image_url": control_image,
+                "control_image": control_image,
                 "control_mode": control_mode,
                 "conditioning_scale": conditioning_scale
             }],
