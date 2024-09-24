@@ -14,8 +14,8 @@ class FalAPIFluxProNode(BaseFalAPIFluxNode):
         input_types["required"]["safety_tolerance"] = (["1", "2", "3", "4", "5", "6"],)
         return input_types
 
-    def prepare_arguments(self, prompt, image_size, num_inference_steps, guidance_scale, num_images, safety_tolerance, seed=None, **kwargs):
-        arguments = super().prepare_arguments(prompt, image_size, num_inference_steps, guidance_scale, num_images, seed, **kwargs)
+    def prepare_arguments(self, safety_tolerance, **kwargs):
+        arguments = super().prepare_arguments(**kwargs)
         arguments["safety_tolerance"] = safety_tolerance
         return arguments
 
