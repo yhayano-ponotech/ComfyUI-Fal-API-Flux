@@ -11,6 +11,9 @@ class FalAPIFluxDevWithLoraImageToImageNode(FalAPIFluxDevWithLoraNode):
         super().__init__()
         self.set_api_endpoint("fal-ai/flux-lora/image-to-image")
         
+    def set_api_endpoint(self, endpoint):
+        super().set_api_endpoint(endpoint)
+        
     @classmethod
     def INPUT_TYPES(cls):
         input_types = super().INPUT_TYPES()
