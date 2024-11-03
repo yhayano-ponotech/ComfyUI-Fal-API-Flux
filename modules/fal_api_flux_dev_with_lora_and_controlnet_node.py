@@ -21,17 +21,28 @@ class FalAPIFluxDevWithLoraAndControlNetNode(BaseFalAPIFluxNode):
     def INPUT_TYPES(cls):
         input_types = super().INPUT_TYPES()
         input_types["optional"].update({
-            "lora": ("LORA_CONFIG",),
+            "lora_1": ("LORA_CONFIG",),
+            "lora_2": ("LORA_CONFIG",),
+            "lora_3": ("LORA_CONFIG",),
+            "lora_4": ("LORA_CONFIG",),
+            "lora_5": ("LORA_CONFIG",),
             "controlnet": ("CONTROLNET_CONFIG",),
             "controlnet_union": ("CONTROLNET_UNION_CONFIG",),
         })
         return input_types
 
-    def prepare_arguments(self, lora=None, controlnet=None, controlnet_union=None, **kwargs):
+    def prepare_arguments(self, lora_1=None, lora_2=None, lora_3=None, lora_4=None, lora_5=None, 
+                         controlnet=None, controlnet_union=None, **kwargs):
         arguments = super().prepare_arguments(**kwargs)
         
-        if lora:
-            arguments["loras"] = [lora]
+        # Collect all provided LoRA configurations
+        loras = []
+        for lora in [lora_1, lora_2, lora_3, lora_4, lora_5]:
+            if lora is not None:
+                loras.append(lora)
+        
+        if loras:
+            arguments["loras"] = loras
             
         if controlnet:
             arguments["controlnets"] = [{
