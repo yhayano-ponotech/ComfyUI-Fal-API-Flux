@@ -36,7 +36,8 @@ class BaseFalAPIFluxNode:
         return {
             "required": {
                 "prompt": ("STRING", {"multiline": True}),
-                "image_size": (["square_hd", "square", "portrait_4_3", "portrait_16_9", "landscape_4_3", "landscape_16_9", "custom"],),
+                "width": ("INT", {"default": 1024, "step": 8}),
+                "height": ("INT", {"default": 1024, "step": 8}),
                 "num_inference_steps": ("INT", {"default": 28, "min": 1, "max": 100}),
                 "guidance_scale": ("FLOAT", {"default": 3.5, "min": 0.1, "max": 20.0}),
                 "num_images": ("INT", {"default": 1, "min": 1, "max": 4}),
@@ -44,21 +45,6 @@ class BaseFalAPIFluxNode:
             },
             "optional": {
                 "seed": ("INT", {"default": 0, "min": 0, "max": 0xffffffffffffffff}),
-                # Only show these when image_size is "custom"
-                "width": ("INT", {
-                    "default": 1024,
-                    "min": 256,
-                    "max": 2048,
-                    "step": 8,
-                    "show_if": {"image_size": "custom"}
-                }),
-                "height": ("INT", {
-                    "default": 1024,
-                    "min": 256,
-                    "max": 2048,
-                    "step": 8,
-                    "show_if": {"image_size": "custom"}
-                }),
             }
         }
 
@@ -66,7 +52,7 @@ class BaseFalAPIFluxNode:
     FUNCTION = "generate"
     CATEGORY = "image generation"
 
-    def prepare_arguments(self, prompt, image_size, num_inference_steps, guidance_scale, num_images, enable_safety_checker, seed=None, width=None, height=None, **kwargs):
+    def prepare_arguments(self, prompt, width, height, num_inference_steps, guidance_scale, num_images, enable_safety_checker, seed=None, **kwargs):
         if not self.api_key:
             raise ValueError("API key is not set. Please check your config.ini file.")
 
@@ -79,15 +65,12 @@ class BaseFalAPIFluxNode:
         }
 
         # Handle custom image size
-        if image_size == "custom":
-            if width is None or height is None:
-                raise ValueError("Width and height must be provided when using custom image size")
-            arguments["image_size"] = {
-                "width": width,
-                "height": height
-            }
-        else:
-            arguments["image_size"] = image_size
+        if width is None or height is None:
+            raise ValueError("Width and height must be provided when using custom image size")
+        arguments["image_size"] = {
+            "width": width,
+            "height": height
+        }
 
         if seed is not None and seed != 0:
             arguments["seed"] = seed
