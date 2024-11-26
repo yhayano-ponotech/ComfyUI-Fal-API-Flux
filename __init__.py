@@ -12,6 +12,9 @@ from .modules.fal_api_flux_lora_config_node import FalAPIFluxLoraConfigNode
 from .modules.fal_api_flux_controlnet_config_node import FalAPIFluxControlNetConfigNode
 from .modules.fal_api_flux_controlnet_union_config_node import FalAPIFluxControlNetUnionConfigNode
 from .modules.fal_api_flux_pro_canny_node import FalAPIFluxProCannyNode
+from .modules.fal_api_flux_pro_depth_node import FalAPIFluxProDepthNode
+from .modules.fal_api_flux_pro_fill_node import FalAPIFluxProFillNode
+from .modules.fal_api_flux_pro_redux_node import FalAPIFluxProReduxNode
 
 NODE_CLASS_MAPPINGS = {
     "FalAPIFluxDevNode": FalAPIFluxDevNode,
@@ -27,7 +30,10 @@ NODE_CLASS_MAPPINGS = {
     "FalAPIFluxLoraConfigNode": FalAPIFluxLoraConfigNode,
     "FalAPIFluxControlNetConfigNode": FalAPIFluxControlNetConfigNode,
     "FalAPIFluxControlNetUnionConfigNode": FalAPIFluxControlNetUnionConfigNode,
-    "FalAPIFluxProCannyNode": FalAPIFluxProCannyNode
+    "FalAPIFluxProCannyNode": FalAPIFluxProCannyNode,
+    "FalAPIFluxProDepthNode": FalAPIFluxProDepthNode,
+    "FalAPIFluxProFillNode": FalAPIFluxProFillNode,
+    "FalAPIFluxProReduxNode": FalAPIFluxProReduxNode
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
@@ -45,7 +51,10 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "FalAPIFluxControlNetConfigNode": "Fal API Flux ControlNet Config",
     "FalAPIFluxControlNetUnionConfigNode": "Fal API Flux ControlNet Union Config",
     "FalAPIFluxDevImageToImageNode": "Fal API Flux Dev Image-to-Image",
-    "FalAPIFluxProCannyNode": "Fal API Flux Pro Canny"
+    "FalAPIFluxProCannyNode": "Fal API Flux Pro Canny",
+    "FalAPIFluxProDepthNode": "Fal API Flux Pro Depth",
+    "FalAPIFluxProFillNode": "Fal API Flux Pro Fill",
+    "FalAPIFluxProReduxNode": "Fal API Flux Pro Redux"
 }
 
 __all__ = [
@@ -62,5 +71,8 @@ __all__ = [
     'FalAPIFluxLoraConfigNode', 
     'FalAPIFluxControlNetConfigNode', 
     'FalAPIFluxControlNetUnionConfigNode',
-    'FalAPIFluxProCannyNode'
+    'FalAPIFluxProCannyNode',
+    'FalAPIFluxProDepthNode',
+    'FalAPIFluxProFillNode',
+    'FalAPIFluxProReduxNode'
 ]
