@@ -11,6 +11,7 @@ from .modules.fal_api_flux_pro_v11_node import FalAPIFluxProV11Node
 from .modules.fal_api_flux_lora_config_node import FalAPIFluxLoraConfigNode
 from .modules.fal_api_flux_controlnet_config_node import FalAPIFluxControlNetConfigNode
 from .modules.fal_api_flux_controlnet_union_config_node import FalAPIFluxControlNetUnionConfigNode
+from .modules.fal_api_flux_pro_canny_node import FalAPIFluxProCannyNode
 
 NODE_CLASS_MAPPINGS = {
     "FalAPIFluxDevNode": FalAPIFluxDevNode,
@@ -25,7 +26,8 @@ NODE_CLASS_MAPPINGS = {
     "FalAPIFluxProV11Node": FalAPIFluxProV11Node,
     "FalAPIFluxLoraConfigNode": FalAPIFluxLoraConfigNode,
     "FalAPIFluxControlNetConfigNode": FalAPIFluxControlNetConfigNode,
-    "FalAPIFluxControlNetUnionConfigNode": FalAPIFluxControlNetUnionConfigNode
+    "FalAPIFluxControlNetUnionConfigNode": FalAPIFluxControlNetUnionConfigNode,
+    "FalAPIFluxProCannyNode": FalAPIFluxProCannyNode
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
@@ -42,7 +44,8 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "FalAPIFluxLoraConfigNode": "Fal API Flux LoRA Config",
     "FalAPIFluxControlNetConfigNode": "Fal API Flux ControlNet Config",
     "FalAPIFluxControlNetUnionConfigNode": "Fal API Flux ControlNet Union Config",
-    "FalAPIFluxDevImageToImageNode": "Fal API Flux Dev Image-to-Image"
+    "FalAPIFluxDevImageToImageNode": "Fal API Flux Dev Image-to-Image",
+    "FalAPIFluxProCannyNode": "Fal API Flux Pro Canny"
 }
 
 __all__ = [
@@ -58,5 +61,6 @@ __all__ = [
     'FalAPIFluxProV11Node', 
     'FalAPIFluxLoraConfigNode', 
     'FalAPIFluxControlNetConfigNode', 
-    'FalAPIFluxControlNetUnionConfigNode'
+    'FalAPIFluxControlNetUnionConfigNode',
+    'FalAPIFluxProCannyNode'
 ]
