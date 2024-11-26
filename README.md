@@ -80,9 +80,10 @@ After installation, you'll find the following new nodes in the ComfyUI interface
 5. "Fal API Flux with LoRA and ControlNet": A node for text-to-image generation using FLUX.1 [dev] with LoRA and ControlNet support.
 6. "Fal API Flux with LoRA and ControlNet Image-to-Image": A node for image-to-image generation using FLUX.1 [dev] with LoRA and ControlNet support.
 7. "Fal API Flux Pro": A node for text-to-image generation using FLUX.1 [pro].
-8. "Fal API Flux LoRA Config": A node for configuring LoRA models.
-9. "Fal API Flux ControlNet Config": A node for configuring ControlNet.
-10. "Fal API Flux ControlNet Union Config": A node for configuring ControlNet Union.
+8. "Fal API Flux Pro V1.1": An updated node for text-to-image generation using FLUX.1 [pro] V1.1.
+9. "Fal API Flux LoRA Config": A node for configuring LoRA models.
+10. "Fal API Flux ControlNet Config": A node for configuring ControlNet.
+11. "Fal API Flux ControlNet Union Config": A node for configuring ControlNet Union.
 
 ### Basic Usage
 
