@@ -27,12 +27,12 @@ class FalAPIFluxProFillNode(FalAPIFluxProNode):
         # Upload the image and mask and get its URL
         image_url = self.upload_image(image)
         mask_image_url = self.upload_image(mask_image)
-        logger.info(f"Uploaded target image. URL: {control_image_url}")
-        logger.info(f"Uploaded mask image. URL: {control_image_url}")
+        logger.info(f"Uploaded target image. URL: {image_url}")
+        logger.info(f"Uploaded mask image. URL: {mask_image_url}")
         
         # Update arguments with Fill-specific parameters
         arguments.update({
-            "image_url": control_image_url,
+            "image_url": image_url,
             "mask_url": mask_image_url
         })
         
