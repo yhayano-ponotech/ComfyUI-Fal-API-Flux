@@ -39,7 +39,7 @@ class BaseFalAPIFluxNode:
                 "width": ("INT", {"default": 1024, "step": 8}),
                 "height": ("INT", {"default": 1024, "step": 8}),
                 "num_inference_steps": ("INT", {"default": 28, "min": 1, "max": 100}),
-                "guidance_scale": ("FLOAT", {"default": 3.5, "min": 0.1, "max": 20.0}),
+                "guidance_scale": ("FLOAT", {"default": 3.5, "min": 0.1, "max": 40.0}),
                 "num_images": ("INT", {"default": 1, "min": 1, "max": 4}),
                 "enable_safety_checker": ("BOOLEAN", {"default": True}),
             },
