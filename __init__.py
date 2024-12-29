@@ -15,6 +15,7 @@ from .modules.fal_api_flux_pro_canny_node import FalAPIFluxProCannyNode
 from .modules.fal_api_flux_pro_depth_node import FalAPIFluxProDepthNode
 from .modules.fal_api_flux_pro_fill_node import FalAPIFluxProFillNode
 from .modules.fal_api_flux_pro_redux_node import FalAPIFluxProReduxNode
+from .modules.fal_api_flux_dev_canny_with_lora_node import FalAPIFluxDevCannyWithLoraNode
 
 NODE_CLASS_MAPPINGS = {
     "FalAPIFluxDevNode": FalAPIFluxDevNode,
@@ -33,7 +34,8 @@ NODE_CLASS_MAPPINGS = {
     "FalAPIFluxProCannyNode": FalAPIFluxProCannyNode,
     "FalAPIFluxProDepthNode": FalAPIFluxProDepthNode,
     "FalAPIFluxProFillNode": FalAPIFluxProFillNode,
-    "FalAPIFluxProReduxNode": FalAPIFluxProReduxNode
+    "FalAPIFluxProReduxNode": FalAPIFluxProReduxNode,
+    "FalAPIFluxDevCannyWithLoraNode": FalAPIFluxDevCannyWithLoraNode
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
@@ -54,7 +56,8 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "FalAPIFluxProCannyNode": "Fal API Flux Pro Canny",
     "FalAPIFluxProDepthNode": "Fal API Flux Pro Depth",
     "FalAPIFluxProFillNode": "Fal API Flux Pro Fill",
-    "FalAPIFluxProReduxNode": "Fal API Flux Pro Redux"
+    "FalAPIFluxProReduxNode": "Fal API Flux Pro Redux",
+    "FalAPIFluxDevCannyWithLoraNode": "Fal API Flux Dev Canny With LoRA"
 }
 
 __all__ = [
@@ -74,5 +77,6 @@ __all__ = [
     'FalAPIFluxProCannyNode',
     'FalAPIFluxProDepthNode',
     'FalAPIFluxProFillNode',
-    'FalAPIFluxProReduxNode'
+    'FalAPIFluxProReduxNode',
+    'FalAPIFluxDevCannyWithLoraNode'
 ]
