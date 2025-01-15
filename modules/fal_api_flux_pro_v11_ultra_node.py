@@ -35,17 +35,20 @@ class FalAPIFluxProV11UltraNode(FalAPIFluxProV11Node):
         # add `raw`
         input_types["required"]["raw"] = ("BOOLEAN", {"default": True})
 
+        # add `output_format`
+        input_types["required"]["output_format"] = (["jpeg", "png"],)
+
         return input_types
 
     def prepare_arguments(self, prompt, aspect_ratio, num_images, safety_tolerance,
-                          enable_safety_checker, raw, seed=None, **kwargs):
+                          enable_safety_checker, output_format, raw, seed=None, **kwargs):
         # override from base since we don't have width and height
         if not self.api_key:
             raise ValueError("API key is not set. Please check your config.ini file.")
 
         arguments = {"prompt": prompt, "raw": raw, "num_images": num_images,
                      "enable_safety_checker": enable_safety_checker,
-                     "safety_tolerance": safety_tolerance, "aspect_ratio": aspect_ratio}
+                     "safety_tolerance": safety_tolerance, "aspect_ratio": aspect_ratio, "output_format": output_format}
 
         if seed is not None and seed != 0:
             arguments["seed"] = seed
