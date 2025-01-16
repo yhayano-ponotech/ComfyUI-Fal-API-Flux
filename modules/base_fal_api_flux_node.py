@@ -163,8 +163,9 @@ class BaseFalAPIFluxNode:
                 # Convert PIL Image to NumPy array
                 img_np = np.array(img).astype(np.float32) / 255.0
                 
-                # Convert NumPy array to PyTorch tensor
+                # Create tensor with batch dimension (1, H, W, C)
                 img_tensor = torch.from_numpy(img_np)
+                img_tensor = img_tensor.unsqueeze(0)  # (1, H, W, C)
                 
                 output_images.append(img_tensor)
             except Exception as e:
@@ -174,8 +175,14 @@ class BaseFalAPIFluxNode:
             logger.error("Failed to process any of the generated images.")
             raise RuntimeError("Failed to process any of the generated images.")
 
-        logger.debug(f"Returning {len(output_images)} images with shape: {output_images[0].shape}")
-        return output_images
+        # Stack all images into a single batch tensor
+        if output_images:
+            output_tensor = torch.cat(output_images, dim=0)
+            logger.debug(f"Returning batched tensor with shape: {output_tensor.shape}")
+            return [output_tensor] 
+        else:
+            logger.error("No images were successfully processed")
+            raise RuntimeError("No images were successfully processed")
     
     def upload_image(self, image):
         try:
@@ -236,4 +243,4 @@ class BaseFalAPIFluxNode:
         arguments = self.prepare_arguments(**kwargs)
         result = self.call_api(arguments)
         output_images = self.process_images(result)
-        return (output_images,)
+        return tuple(output_images)
