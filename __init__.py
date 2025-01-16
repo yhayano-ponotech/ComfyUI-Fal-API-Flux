@@ -8,6 +8,7 @@ from .modules.fal_api_flux_dev_with_lora_and_controlnet_image_to_image_node impo
 from .modules.fal_api_flux_dev_with_lora_and_controlnet_inpaint_node import FalAPIFluxDevWithLoraAndControlNetInpaintNode
 from .modules.fal_api_flux_pro_node import FalAPIFluxProNode
 from .modules.fal_api_flux_pro_v11_node import FalAPIFluxProV11Node
+from .modules.fal_api_flux_pro_v11_ultra_node import FalAPIFluxProV11UltraNode
 from .modules.fal_api_flux_lora_config_node import FalAPIFluxLoraConfigNode
 from .modules.fal_api_flux_controlnet_config_node import FalAPIFluxControlNetConfigNode
 from .modules.fal_api_flux_controlnet_union_config_node import FalAPIFluxControlNetUnionConfigNode
@@ -28,6 +29,7 @@ NODE_CLASS_MAPPINGS = {
     "FalAPIFluxDevWithLoraAndControlNetInpaintNode": FalAPIFluxDevWithLoraAndControlNetInpaintNode,
     "FalAPIFluxProNode": FalAPIFluxProNode,
     "FalAPIFluxProV11Node": FalAPIFluxProV11Node,
+    "FalAPIFluxProV11UltraNode": FalAPIFluxProV11UltraNode,
     "FalAPIFluxLoraConfigNode": FalAPIFluxLoraConfigNode,
     "FalAPIFluxControlNetConfigNode": FalAPIFluxControlNetConfigNode,
     "FalAPIFluxControlNetUnionConfigNode": FalAPIFluxControlNetUnionConfigNode,
@@ -49,6 +51,7 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "FalAPIFluxDevWithLoraAndControlNetInpaintNode": "Fal API Flux with LoRA and ControlNet Inpaint",
     "FalAPIFluxProNode": "Fal API Flux Pro",
     "FalAPIFluxProV11Node": "Fal API Flux Pro V1.1",
+    "FalAPIFluxProV11UltraNode": "Fal API Flux Pro v1.1 Ultra",
     "FalAPIFluxLoraConfigNode": "Fal API Flux LoRA Config",
     "FalAPIFluxControlNetConfigNode": "Fal API Flux ControlNet Config",
     "FalAPIFluxControlNetUnionConfigNode": "Fal API Flux ControlNet Union Config",
@@ -61,16 +64,17 @@ NODE_DISPLAY_NAME_MAPPINGS = {
 }
 
 __all__ = [
-    'FalAPIFluxDevNode', 
-    'FalAPIFluxDevImageToImageNode', 
-    'FalAPIFluxNodeWithControlNet', 
-    'FalAPIFluxDevWithLoraImageToImageNode', 
-    'FalAPIFluxDevWithLoraInpaintNode', 
-    'FalAPIFluxDevWithLoraAndControlNetNode', 
-    'FalAPIFluxDevWithLoraAndControlNetImageToImageNode', 
+    'FalAPIFluxDevNode',
+    'FalAPIFluxDevImageToImageNode',
+    'FalAPIFluxNodeWithControlNet',
+    'FalAPIFluxDevWithLoraImageToImageNode',
+    'FalAPIFluxDevWithLoraInpaintNode',
+    'FalAPIFluxDevWithLoraAndControlNetNode',
+    'FalAPIFluxDevWithLoraAndControlNetImageToImageNode',
     'FalAPIFluxDevWithLoraAndControlNetInpaintNode',
-    'FalAPIFluxProNode', 
-    'FalAPIFluxProV11Node', 
+    'FalAPIFluxProNode',
+    'FalAPIFluxProV11Node',
+    "FalAPIFluxProV11UltraNode",
     'FalAPIFluxLoraConfigNode', 
     'FalAPIFluxControlNetConfigNode', 
     'FalAPIFluxControlNetUnionConfigNode',
