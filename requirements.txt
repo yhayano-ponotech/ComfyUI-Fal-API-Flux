@@ -1,5 +1,5 @@
 requests==2.32.3
 configparser==7.1.0
-fal-client==0.4.1
+fal-client
 numpy==2.1.1
 torch
